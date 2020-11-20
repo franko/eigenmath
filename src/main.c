@@ -13,6 +13,7 @@ int
 main(int argc, char *argv[])
 {
 	int i;
+	int interactive = 0;
 
 	for (i = 1; i < argc; i++) {
 		if (strcmp(argv[i], "--latex") == 0)
@@ -21,6 +22,8 @@ main(int argc, char *argv[])
 			doc_type = DOC_MATHML;
 		else if (strcmp(argv[i], "--mathjax") == 0)
 			doc_type = DOC_MATHJAX;
+		else if (strcmp(argv[i], "-i") == 0)
+			interactive = 1;
 		else
 			infile = argv[i];
 	}
@@ -30,7 +33,7 @@ main(int argc, char *argv[])
 	if (infile)
 		run_infile();
 
-	if (isatty(fileno(stdout)))
+	if (interactive || isatty(fileno(stdout)))
 		run_stdin();
 
 	end_document();

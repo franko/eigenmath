@@ -958,6 +958,7 @@ print_it(void)
 	}
 
 	fputc('\n', stdout);
+	fflush(stdout);
 }
 
 char print_buffer[10000];
